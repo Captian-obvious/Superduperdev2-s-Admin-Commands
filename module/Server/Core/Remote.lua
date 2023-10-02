@@ -11,7 +11,7 @@ function remote.Send(var,data)
             for i,v in pairs(data.Targets) do
                 if v then
                     task.spawn(function()
-                    game:GetService('ReplicatedStorage'):WaitForChild('Superduperdev2MainRemote'):FireClient(v,var,data))
+                        game:GetService('ReplicatedStorage'):WaitForChild('Superduperdev2MainRemote'):FireClient(v,var,data))
                     end)
                 end
             end
@@ -20,5 +20,19 @@ function remote.Send(var,data)
         game:GetService('ReplicatedStorage'):WaitForChild('Superduperdev2MainRemote'):FireServer(var,data)
     end
 end
+
+game:GetService('ReplicatedStorage'):WaitForChild('Superduperdev2MainRemote').OnServerEvent:Connect(function(plr,var,data)
+    if var=='ProcessCommand' then
+        server.ProcessCommand(plr,data)
+    elseif var=='RunCommand' then
+        server.RunCommand(data) --[[ Doesnt care about rank for this.--]]
+    end
+end)
+
+game:GetService('ReplicatedStorage'):WaitForChild('Superduperdev2MainRemote').OnClientEvent:Connect(function(var,data)
+    if var=='ChatMessage' then
+        server:DisplaySystemMessage(game:GetService('Players').LocalPlayer,data.MessageData)
+    end
+end)
 
 return remote
