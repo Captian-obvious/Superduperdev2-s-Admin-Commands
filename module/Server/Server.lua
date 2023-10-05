@@ -2,12 +2,16 @@ server = {}
 remote = require(script.Parent.Core.Remote)
 core = require(script.Parent.Core.Core)
 admin = require(script.Parent.Admin.Admin)
+cmdm = require(script.Parent.Admin.Commands)
 
 function server:Initialize()
     warn('Superduperdev2 Admin Commands: Loading..')
     warn('Superduperdev2 Admin Commands: Initializing server...')
     warn('Superduperdev2 Admin Commands: Requiring modules...')
-    
+    server.Commands = cmdm
+    server.Admin = admin
+    server.Core = core
+    server.Remote = remote
 end
 
 function server:ProcessArguments(str,t)
