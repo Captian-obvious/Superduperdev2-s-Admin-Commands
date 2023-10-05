@@ -316,4 +316,29 @@ function server:ProcessArguments(str,t)
     return args
 end
 
+function server:ProcessCommand(player,message)
+    local commands = message:split(server.Seperator)
+    if commands then
+        for _,msg in pairs(commands) do
+            if msg~=nil then
+                local command = server:GetCommand(msg:lower())
+                if command~=nil then
+                    local com = command.Command -- gives the server a reference back to the command table
+                    local args = command.Args
+                    if player:GetAttribute('Rank') >= com.Level then
+                        local c = command.Command
+                        local f = c.Function
+                        local args = server:ProcessArguments(args,c.Args)
+                        if args ~= nil then
+                            f(player,args)
+                        end
+                    else
+                        server:Error(player,'You do not have permission to run'..msg,5)
+                    end
+                end
+            end
+        end
+    end
+end
+
 return server
