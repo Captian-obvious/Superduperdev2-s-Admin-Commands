@@ -363,4 +363,26 @@ function server:Kick(player,plr,reason)
     end
 end
 
+function server:ServerBan(player,plr,reason,t)
+    if plr ~= nil then
+        local r = reason or 'No Reason Provided.'
+        if plr:GetAttribute('Rank') < 500 then
+            plr:Kick(r)
+            game:GetService('Players').PlayerAdded:Connect(function(p)
+                if p.Name == plr.Name then
+                    plr:Kick([[
+                    Superduperdev2 Admin Commands: 
+                    You have been banned from this server! 
+                    Reason: ]]..r..[[
+                    You cannot rejoin this server!
+                    Join another server.
+                    ]])
+                end
+            end)
+        else
+            server:Error(player,'This player is an Administrator and cannot be kicked!',5)
+        end
+    end
+end
+
 return server
