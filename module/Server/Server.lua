@@ -268,4 +268,36 @@ function server:RunCommand(player,command,str) -- this allows scripts to also ru
     end
 end
 
+function server:Error(player,str,ti) -- error function
+local ts = game:GetService('TweenService')
+if ti ==nil then
+ti=1
+end
+local info = TweenInfo.new(
+0.5, -- tweeen time
+Enum.EasingStyle.Linear, -- style
+Enum.EasingDirection.Out, -- direction
+0, -- repeat count
+false, -- reverses?
+0 -- delay
+)
+local gui = script.Error:Clone()
+gui.Parent = player.PlayerGui
+gui.Frame.msg.Text = str
+local t = ts:Create(gui.Frame,info,{Position = UDim2.new(.5,0,.5,0),BackgroundTransparency = 0.3})
+t:Play()
+t.Completed:Connect(function(ps)
+if ps == Enum.PlaybackState.Completed then
+wait(ti)
+local t2 = ts:Create(gui.Frame,info,{Position = UDim2.new(.5,0,0,0),BackgroundTransparency = 0.9})
+t2:Play()
+t2.Completed:Connect(function(ps2)
+if ps2 == Enum.PlaybackState.Completed then
+gui:Destroy()
+end
+end)
+end
+end)
+end
+
 return server
