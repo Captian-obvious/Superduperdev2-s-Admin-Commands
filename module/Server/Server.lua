@@ -437,4 +437,23 @@ function server:GetSecondsFromTime(str)
     return result
 end
 
+function server:GetRank(player)
+    local result = 'Player'
+    if player ~=nil then
+        local level = player:GetAttribute('Rank')
+        if level >= 100 and level < 300 then
+            result = 'VIP'
+        elseif level >= 300 and level < 500 then
+            result = 'Moderator'
+        elseif level >= 500 and level < 800 then
+            result = 'Admin'
+        elseif level >= 800 and level < 1000 then
+            result = 'Owner'
+        elseif level >= 1000 then
+            result = 'Creator'
+        end
+    end
+    return result
+end
+
 return server
