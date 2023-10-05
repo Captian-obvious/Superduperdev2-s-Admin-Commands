@@ -456,4 +456,55 @@ function server:GetRank(player)
     return result
 end
 
+function server:GetCommand(str) 
+	local thecommand = nil
+	local args = nil
+	if str:sub(1,2):find('/e') then
+		local msg = str:sub(4)
+		warn("Silent Command detected: "..tostring(str))
+		for i,v in pairs(server.Commands) do
+			if v and v.Prefix then
+				for c,com in pairs(v.Commands) do
+					local cmd = string.split(msg, server.StringSplitter)
+					if cmd[1] and cmd[1] == v.Prefix..com:lower() then 
+						thecommand = v
+						table.remove(cmd, 1)
+						args = table.concat(cmd, server.StringSplitter)
+						warn("Command detected (" .. com .. ")")
+					else
+						--warn("Command not detected (" .. com .. ")")
+					end
+				end
+			else
+				warn("Command is nil (" .. i .. " | Cmd Table: " .. tostring(v) .. " | Pre: " .. tostring(v.Prefix) .. ")")
+			end
+		end
+	else
+		for i,v in pairs(server.Commands) do
+			if v and v.Prefix then
+				for c,com in pairs(v.Commands) do
+					local cmd = string.split(str, server.StringSplitter)
+					if cmd[1] and cmd[1] == v.Prefix..com:lower() then 
+						thecommand = v
+						table.remove(cmd, 1)
+						args = table.concat(cmd, server.StringSplitter)
+						warn("Command detected (" .. com .. ")")
+					else
+						--warn("Command not detected (" .. com .. ")")
+					end
+				end
+			else
+				warn("Command is nil (" .. i .. " | Cmd Table: " .. tostring(v) .. " | Pre: " .. tostring(v.Prefix) .. ")")
+			end
+		end
+	end
+	if thecommand then
+		print("Returned command ", thecommand, " | Args: " .. tostring(args))
+		return {Command=thecommand,Args = args}
+	else
+		warn("Superduperdev2 Admin Commands: Could not find command! | String: " .. tostring(str) .. " | Args: " .. tostring(args) .. " | Cmd: " .. tostring(thecommand)) -- using tostring bc they might be nil
+		return nil
+	end
+end
+
 return server
