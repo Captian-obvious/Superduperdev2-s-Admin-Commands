@@ -341,4 +341,26 @@ function server:ProcessCommand(player,message)
     end
 end
 
+function server:Rank(player,level)
+    if player ~=nil then
+        player:SetAttribute('Rank',level)
+    end
+end
+
+function server:Kick(player,plr,reason)
+    if plr ~= nil then
+        local r = reason or 'No Reason Provided.'
+        if plr:GetAttribute('Rank') < 500 then
+            plr:Kick([[
+            Superduperdev2 Admin Commands:
+            You have been kicked from this server!
+            Reason: ]]..r..[[
+            Please rejoin and do not attempt the above again.
+            ]])
+        else
+            server:Error(player,'This player is an Administrator and cannot be kicked!',5)
+        end
+    end
+end
+
 return server
