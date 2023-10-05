@@ -8,8 +8,8 @@ local sac = {
         ReplicatedStorage = game:GetService("ReplicatedStorage"),
     },
 };
-local server = require(script.Server.Server),
-local client = require(script.Client.Client),
+server = require(script.Server.Server),
+client = require(script.Client.Client),
 
 function sac:Initialize()
     server.InitializeServer()
