@@ -232,27 +232,25 @@ function server:GetMusicId(id)
     end
     if tostring(id):find("iet") then
         id = 2750483913
-        spawn(
-            function()
-                for i = 1, 10 do
-                    local sky = Instance.new("Sky", game.Lighting)
-                    sky.SkyboxUp = "rbxassetid://1069011469"
-                    sky.SkyboxBk = "rbxassetid://1069011469"
-                    sky.SkyboxDn = "rbxassetid://1069011469"
-                    sky.SkyboxFt = "rbxassetid://1069011469"
-                    sky.SkyboxLf = "rbxassetid://1069011469"
-                    sky.SkyboxRt = "rbxassetid://1069011469"
-                    wait(1)
-                    sky.SkyboxBk = "rbxasset://textures/sky/sky512_bk.tex"
-                    sky.SkyboxUp = "rbxasset://textures/sky/sky512_up.tex"
-                    sky.SkyboxDn = "rbxasset://textures/sky/sky512_dn.tex"
-                    sky.SkyboxFt = "rbxasset://textures/sky/sky512_ft.tex"
-                    sky.SkyboxLf = "rbxasset://textures/sky/sky512_lf.tex"
-                    sky.SkyboxRt = "rbxasset://textures/sky/sky512_rt.tex"
-                    wait(1)
-                end
+        spawn(function()
+            for i = 1, 10 do
+                local sky = Instance.new("Sky", game.Lighting)
+                sky.SkyboxUp = "rbxassetid://1069011469"
+                sky.SkyboxBk = "rbxassetid://1069011469"
+                sky.SkyboxDn = "rbxassetid://1069011469"
+                sky.SkyboxFt = "rbxassetid://1069011469"
+                sky.SkyboxLf = "rbxassetid://1069011469"
+                sky.SkyboxRt = "rbxassetid://1069011469"
+                wait(1)
+                sky.SkyboxBk = "rbxasset://textures/sky/sky512_bk.tex"
+                sky.SkyboxUp = "rbxasset://textures/sky/sky512_up.tex"
+                sky.SkyboxDn = "rbxasset://textures/sky/sky512_dn.tex"
+                sky.SkyboxFt = "rbxasset://textures/sky/sky512_ft.tex"
+                sky.SkyboxLf = "rbxasset://textures/sky/sky512_lf.tex"
+                sky.SkyboxRt = "rbxasset://textures/sky/sky512_rt.tex"
+                wait(1)
             end
-        )
+        end)
     end
     if id then
         return id
