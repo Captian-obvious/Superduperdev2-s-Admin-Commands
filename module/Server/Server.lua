@@ -300,4 +300,20 @@ function server:Error(player,str,ti) -- error function
     end)
 end
 
+function server:ProcessArguments(str,t)
+    local args = str:split(server.StringSplitter)
+    if args ~= nil then
+        local referenceTable = t
+        if (referenceTable) and (#referenceTable < #args) then
+            for i=#referenceTable+1,#args do
+                if args[i] then
+                    args[#referenceTable]=args[#referenceTable]..' '..args[i]
+                end
+            end
+        end
+    end
+    print("Processed args: ", args)
+    return args
+end
+
 return server
