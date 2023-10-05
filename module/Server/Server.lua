@@ -257,4 +257,15 @@ function server:GetMusicId(id)
     end
 end
 
+function server:RunCommand(player,command,str) -- this allows scripts to also run commands (ignores level)
+if server[command]~=nil then
+local c = server[command]
+local f = c.Function
+local args = server:ProcessArguments(str,c.Args)
+if args ~= nil then
+f(player,args)
+end
+end
+end
+
 return server
