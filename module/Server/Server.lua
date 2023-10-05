@@ -385,6 +385,30 @@ function server:ServerBan(player,plr,reason,t)
     end
 end
 
-
+function server:TimeBan(player,plr,reason,t)
+    if plr ~= nil then
+        local r = reason or 'No Reason Provided.'
+        if plr:GetAttribute('Rank') < 500 then
+            local banTime = server:GetSecondsFromTime(t)
+            plr:Kick([[
+                Superduperdev2 Admin Commands: 
+                You have been banned! 
+                Reason: ]]..r..[[
+                Ban Length: ]]..t..[[
+                You cannot join the game until above time has elapsed!
+                Please abide by the rules or you will be perm banned.
+            ]])
+            server.banDataStore:SetAsync(plr.UserId..'_Bans',{
+                StartDate = tick(),
+                EndDate = tick() + banTime,
+                Reason = r,
+                Moderator = player,
+                FormattedDate = t,
+            })
+        else
+            server:Error(player,'This player is an Administrator and cannot be kicked!',5)
+        end
+    end
+end
 
 return server
