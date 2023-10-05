@@ -411,4 +411,30 @@ function server:TimeBan(player,plr,reason,t)
     end
 end
 
+function server:GetSecondsFromTime(str)
+    local day = 86400 -- time in a day for bans
+    local hour = 3600 -- time in an hour for bans
+    local minute = 60
+    local result = 0
+    local number = str:match('%d+')
+    if number then
+        local dayKey = 'd'
+        local hourKey = 'h'
+        local minuteKey = 'min'
+        if string.find(str,dayKey) then
+            local seconds = number * day
+            result = seconds
+        end
+        if string.find(str,hourKey) then
+            local seconds = number * hour
+            result = seconds
+        end
+        if string.find(str,minuteKey) then
+            local seconds = number * minute
+            result = seconds
+        end
+    end
+    return result
+end
+
 return server
