@@ -3,6 +3,7 @@ remote = require(script.Parent.Core.Remote)
 core = require(script.Parent.Core.Core)
 admin = require(script.Parent.Admin.Admin)
 cmdm = require(script.Parent.Admin.Commands)
+service = require(script.Parent.Core.service)
 
 function server:Initialize()
     warn("Superduperdev2 Admin Commands: Loading..")
