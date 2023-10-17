@@ -1,5 +1,7 @@
 client = {
     Prefix = ';',
+    Connectors = {},
+    Runners = {},
 }
 server = require(script.Parent.Parent.Server.Server)
 remote = server.Remote
