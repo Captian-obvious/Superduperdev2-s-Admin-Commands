@@ -1,4 +1,28 @@
-server = {}
+server = {
+	Prefix = ';',
+	Seperator = '|',
+	StringSplitter = ' ',
+	Selectors = {
+		['all']=true,
+		['others']=true,
+		['random']=true,
+		['me']=true
+	},
+	Bans = {},
+	banDataStore = game:GetService('DataStoreService'):GetDataStore('Bans'),
+	FrozenObjects = {},
+	Connectors = {},
+	CommandBarConnections = {},
+	Humanoids = {},
+	ZawarudoDebounce = false,
+	Ranks = {
+		Creators = {'Superduperbloxer2','josejr0322'},
+		HeadAdmins = {},
+		Admins = {},
+		Moderators = {},
+		VIP = {},
+	},
+}
 remote = require(script.Parent.Core.Remote)
 core = require(script.Parent.Core.Core)
 admin = require(script.Parent.Admin.Admin)
